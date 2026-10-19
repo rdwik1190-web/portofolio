@@ -1,0 +1,1158 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#070b12" />
+  <title>Reza Dwi Kurniawan | Modern Portfolio - C++, HTML & JavaScript</title>
+  <meta name="description" content="Portfolio modern Reza Dwi Kurniawan - Mahasiswa Teknik Informatika Universitas Negeri Surabaya (UNESA). Menguasai C++, HTML, CSS, dan JavaScript dengan mode gelap dan terang." />
+  <meta name="keywords" content="Reza Dwi Kurniawan, Portfolio, Web Developer, C++, HTML, JavaScript, Teknik Informatika UNESA, Dark Mode, Light Mode" />
+  <meta name="author" content="Reza Dwi Kurniawan" />
+
+  <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Canvas Background for Constellation Particles -->
+  <canvas id="ambientCanvas" class="ambient-canvas" aria-hidden="true"></canvas>
+  <div class="noise-layer" aria-hidden="true"></div>
+  <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+
+  <!-- Top Announcement Bar / Status Pill -->
+  <aside class="top-announcement" aria-label="Status Pengembang">
+    <div class="container announcement-wrap">
+      <div class="announcement-left">
+        <span class="status-pulse"></span>
+        <span class="announcement-text">Mahasiswa Teknik Informatika UNESA</span>
+      </div>
+      <div class="announcement-right">
+        <span class="announcement-badge">Versi 2.5 (Dual Mode: Dark &amp; Light)</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Sticky Navbar -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-wrap">
+      <a href="#home" class="brand" aria-label="Beranda Reza Dwi Kurniawan">
+        <span class="brand-bracket">&lt;</span>
+        <span class="brand-text">RezaDev</span>
+        <span class="brand-dot">.</span>
+        <span class="brand-bracket">/&gt;</span>
+      </a>
+
+      <nav class="nav-links" id="navMenu" aria-label="Navigasi Utama">
+        <a href="#home" class="nav-item active">Beranda</a>
+        <a href="#about" class="nav-item">Tentang</a>
+        <a href="#codehub" class="nav-item">C++ &amp; Web Lab</a>
+        <a href="#skills" class="nav-item">Keahlian</a>
+        <a href="#projects" class="nav-item">Proyek</a>
+        <a href="#journal" class="nav-item">Jurnal Belajar</a>
+        <a href="#contact" class="nav-item">Kontak</a>
+      </nav>
+
+      <div class="nav-actions">
+        <!-- Theme Switcher Button -->
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Ganti Tema (Gelap/Terang)" title="Ganti Mode Gelap / Terang">
+          <span class="theme-icon icon-sun" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="5"></circle>
+              <line x1="12" y1="1" x2="12" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="23"></line>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+              <line x1="1" y1="12" x2="3" y2="12"></line>
+              <line x1="21" y1="12" x2="23" y2="12"></line>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+          </span>
+          <span class="theme-icon icon-moon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+          </span>
+          <span class="theme-label" id="themeLabel">Mode</span>
+        </button>
+
+        <a class="nav-cta btn btn-outline-cyan" href="https://github.com/rdwik1190-web" target="_blank" rel="noopener noreferrer" aria-label="Buka Profil GitHub Reza">
+          <svg class="svg-icon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+          </svg>
+          <span>GitHub</span>
+        </a>
+
+        <!-- Hamburger Button for Mobile -->
+        <button class="hamburger-btn" id="menuToggle" type="button" aria-label="Buka menu navigasi" aria-expanded="false">
+          <span class="bar bar-1"></span>
+          <span class="bar bar-2"></span>
+          <span class="bar bar-3"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO SECTION -->
+    <section class="hero-section" id="home">
+      <div class="container hero-container">
+        <div class="hero-content reveal">
+          <div class="hero-pill">
+            <span class="badge-dot"></span>
+            <span class="badge-text">Web Developer &amp; C++ Enthusiast</span>
+          </div>
+
+          <h1 class="hero-title">
+            Halo, saya <span class="text-gradient">Reza Dwi Kurniawan</span>
+          </h1>
+
+          <div class="hero-typing-wrapper">
+            <span class="typing-prefix">&gt; Spesialisasi: </span>
+            <span class="typing-text" id="typingText">Web Development (HTML, JS) &amp; C++</span>
+            <span class="typing-cursor">|</span>
+          </div>
+
+          <p class="hero-lead">
+            Mahasiswa <strong>Teknik Informatika Universitas Negeri Surabaya (UNESA)</strong> yang berfokus pada pembangunan antarmuka web modern, interaktif, serta implementasi logika pemrograman algoritma yang kokoh menggunakan <strong>C++</strong>, <strong>HTML</strong>, dan <strong>JavaScript</strong>.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#codehub" class="btn btn-primary-cyan">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="16 18 22 12 16 6"></polyline>
+                <polyline points="8 6 2 12 8 18"></polyline>
+              </svg>
+              <span>Uji Coba C++ &amp; Web Lab</span>
+            </a>
+            <a href="#projects" class="btn btn-glass">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                <line x1="8" y1="21" x2="16" y2="21"></line>
+                <line x1="12" y1="17" x2="12" y2="21"></line>
+              </svg>
+              <span>Lihat Portofolio</span>
+            </a>
+            <a href="CV_Reza_Dwi_Kurniawan.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-glass" id="btnHeroCv" aria-label="Lihat CV Reza Dwi Kurniawan (PDF)">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="16" y1="13" x2="8" y2="13"></line>
+                <line x1="16" y1="17" x2="8" y2="17"></line>
+                <polyline points="10 9 9 9 8 9"></polyline>
+              </svg>
+              <span>Lihat CV</span>
+            </a>
+          </div>
+
+          <!-- Quick Stat Badges -->
+          <div class="hero-stats">
+            <div class="stat-item">
+              <span class="stat-number" data-target="3">0</span><span class="stat-plus">+</span>
+              <span class="stat-label">Proyek Inti C++</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+              <span class="stat-number" data-target="3">0</span>
+              <span class="stat-label">Bahasa Utama (C++, HTML, JS)</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+              <span class="stat-number" data-target="100">0</span><span class="stat-plus">%</span>
+              <span class="stat-label">Dedikasi Belajar</span>
+            </div>
+          </div>
+
+          <!-- Social Links -->
+          <div class="hero-socials">
+            <span class="socials-label">Tautan Cepat:</span>
+            <a href="https://github.com/rdwik1190-web" target="_blank" rel="noopener noreferrer" class="social-circle" title="GitHub Reza" aria-label="GitHub">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+            </a>
+            <a href="https://www.linkedin.com/in/reza-dwi-k-742284441" target="_blank" rel="noopener noreferrer" class="social-circle" title="LinkedIn Reza" aria-label="LinkedIn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            </a>
+            <a href="https://www.instagram.com/kreza8026" target="_blank" rel="noopener noreferrer" class="social-circle" title="Instagram Reza" aria-label="Instagram">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            </a>
+            <button class="social-circle copy-email-btn" type="button" data-email="rdwik1190@gmail.com" title="Salin Alamat Email" aria-label="Salin Email">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- 3D Photo Visual Shell -->
+        <div class="hero-visual reveal">
+          <div class="visual-shell tilt-card" id="heroPhotoCard">
+            <!-- Orbital Ring Effects -->
+            <div class="orbit-ring orbit-ring-outer" aria-hidden="true"></div>
+            <div class="orbit-ring orbit-ring-inner" aria-hidden="true"></div>
+            <div class="orbit-glow-disc" aria-hidden="true"></div>
+
+            <!-- Profile Picture -->
+            <div class="photo-wrapper">
+              <img src="images/foto-reza.jpeg" alt="Foto Profil Reza Dwi Kurniawan" class="profile-img" loading="eager" />
+              <div class="photo-gradient-rim"></div>
+            </div>
+
+            <!-- Orbiting Technology Badges -->
+            <div class="floating-tech-badge badge-cpp" title="C++ Programming">
+              <span class="badge-icon-txt">C++</span>
+              <span class="badge-sub">Algorithm</span>
+            </div>
+
+            <div class="floating-tech-badge badge-html" title="HTML5 Semantic">
+              <span class="badge-icon-txt">&lt;/&gt;</span>
+              <span class="badge-sub">HTML5</span>
+            </div>
+
+            <div class="floating-tech-badge badge-js" title="JavaScript Modern">
+              <span class="badge-icon-txt">JS</span>
+              <span class="badge-sub">Interactive</span>
+            </div>
+
+            <!-- Floating Card: Status -->
+            <div class="floating-info-card">
+              <div class="pulse-indicator"></div>
+              <div class="info-content">
+                <span class="info-label">Status Saat Ini</span>
+                <strong class="info-value">Mahasiswa Teknik Informatika UNESA</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scroll Indicator -->
+      <a href="#about" class="scroll-down-hint" aria-label="Gulir ke bawah">
+        <span class="scroll-txt">GULIR KE BAWAH</span>
+        <div class="scroll-mouse">
+          <span class="scroll-wheel"></span>
+        </div>
+      </a>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section class="section about-section" id="about">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-subtitle">TENTANG SAYA</span>
+          <h2 class="section-title">Dedikasi Belajar &amp; Fondasi Rekayasa Perangkat Lunak</h2>
+          <p class="section-desc">
+            Menggabungkan pemikiran logika matematika yang disiplin dari <strong>C++</strong> dengan kreativitas visual antarmuka web modern berbasis <strong>HTML5, CSS, dan JavaScript</strong>.
+          </p>
+        </div>
+
+        <div class="about-grid">
+          <!-- Text Story Column -->
+          <div class="about-story reveal">
+            <h3 class="story-heading">Membangun Fondasi Pemrograman Sejak Perkuliahan</h3>
+            <p>
+              Saya adalah mahasiswa jurusan <strong>Teknik Informatika</strong> di <strong>Universitas Negeri Surabaya (UNESA)</strong>. Dalam studi saya, saya menekuni bagaimana logika komputasi dibangun dari dasar melalui bahasa pemrograman sistem <strong>C++</strong>, mulai dari struktur kontrol, array, fungsi modular, hingga manipulasi algoritma.
+            </p>
+            <p>
+              Seiring dengan itu, minat saya pada dunia <strong>Web Development</strong> mendorong saya untuk menguasai trias teknologi web standar industri: <strong>HTML</strong> untuk semantik struktural yang aksesibel, <strong>CSS modern</strong> untuk tata letak responsif dan estetika dinamis, serta <strong>JavaScript</strong> untuk menciptakan interaksi pengguna yang hidup dan intuitif.
+            </p>
+
+            <!-- 3 Core Philosophy Pillars -->
+            <div class="pillars-grid">
+              <div class="pillar-card">
+                <div class="pillar-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                </div>
+                <h4>Logika Kuat</h4>
+                <p>Algoritma berbasis C++ yang efisien, terstruktur, dan mudah ditelusuri.</p>
+              </div>
+
+              <div class="pillar-card">
+                <div class="pillar-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                </div>
+                <h4>Kode Bersih</h4>
+                <p>HTML semantik &amp; arsitektur CSS modern dengan variabel dan flexbox/grid.</p>
+              </div>
+
+              <div class="pillar-card">
+                <div class="pillar-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polygon points="10 8 16 12 10 16 10 8"></polygon></svg>
+                </div>
+                <h4>Interaktivitas</h4>
+                <p>JavaScript modular murni (Vanilla JS) dengan performa tinggi &amp; ramah aksesibilitas.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Interactive Code Object Terminal -->
+          <div class="about-terminal-col reveal">
+            <div class="mac-terminal tilt-card">
+              <div class="terminal-bar">
+                <div class="terminal-dots">
+                  <span class="dot dot-red"></span>
+                  <span class="dot dot-yellow"></span>
+                  <span class="dot dot-green"></span>
+                </div>
+                <span class="terminal-title">developer-profile.ts &mdash; RezaDev</span>
+                <button class="terminal-copy-btn" id="copyProfileBtn" type="button" title="Salin Kode Profil">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                  <span>Salin</span>
+                </button>
+              </div>
+
+              <div class="terminal-code-body">
+                <pre><code id="profileCodeSnippet"><span class="syn-comment">// Metadata Pengembang &amp; Mahasiswa UNESA</span>
+<span class="syn-keyword">interface</span> <span class="syn-type">DeveloperProfile</span> {
+  <span class="syn-prop">name</span>: <span class="syn-type">string</span>;
+  <span class="syn-prop">campus</span>: <span class="syn-type">string</span>;
+  <span class="syn-prop">major</span>: <span class="syn-type">string</span>;
+  <span class="syn-prop">coreTech</span>: <span class="syn-type">string</span>[];
+  <span class="syn-prop">modes</span>: <span class="syn-type">string</span>[];
+  <span class="syn-prop">growthMindset</span>: <span class="syn-type">boolean</span>;
+}
+
+<span class="syn-keyword">const</span> <span class="syn-var">rezaProfile</span>: <span class="syn-type">DeveloperProfile</span> = {
+  <span class="syn-prop">name</span>: <span class="syn-string">"Reza Dwi Kurniawan"</span>,
+  <span class="syn-prop">campus</span>: <span class="syn-string">"Universitas Negeri Surabaya"</span>,
+  <span class="syn-prop">major</span>: <span class="syn-string">"Teknik Informatika"</span>,
+  <span class="syn-prop">coreTech</span>: [
+    <span class="syn-string">"C++"</span>,          <span class="syn-comment">// Logika & Algoritma Dasar</span>
+    <span class="syn-string">"HTML5"</span>,        <span class="syn-comment">// Semantic Web & Struktur</span>
+    <span class="syn-string">"JavaScript"</span>,   <span class="syn-comment">// DOM & Interaktivitas</span>
+    <span class="syn-string">"CSS3"</span>          <span class="syn-comment">// Responsif & Glassmorphism</span>
+  ],
+  <span class="syn-prop">modes</span>: [<span class="syn-string">"Dark Mode 🌙"</span>, <span class="syn-string">"Light Mode ☀️"</span>],
+  <span class="syn-prop">growthMindset</span>: <span class="syn-literal">true</span>
+};</code></pre>
+              </div>
+
+              <div class="terminal-status-bar">
+                <span>UTF-8</span>
+                <span>TypeScript</span>
+                <span>Ln 25, Col 2</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INTERACTIVE CODE HUB: C++, HTML, & JAVASCRIPT LAB -->
+    <section class="section codehub-section" id="codehub">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-subtitle">INTERACTIVE CODE LAB</span>
+          <h2 class="section-title">Laboratorium Interaktif: C++, HTML &amp; JavaScript</h2>
+          <p class="section-desc">
+            Jalankan logika algoritma C++ langsung di browser, amati kode aslinya, serta eksplorasi demonstrasi interaktif berbasis HTML dan JavaScript.
+          </p>
+        </div>
+
+        <div class="codehub-container reveal">
+          <!-- Hub Navigation Tabs -->
+          <div class="codehub-tabs" role="tablist" aria-label="Bahasa Pemrograman">
+            <button class="hub-tab active" data-tab="tab-cpp" role="tab" aria-selected="true" id="tabCppBtn">
+              <span class="hub-tab-dot dot-cpp"></span>
+              <span class="hub-tab-title">C++ Simulator</span>
+              <span class="hub-tab-badge">Logika Nyata</span>
+            </button>
+            <button class="hub-tab" data-tab="tab-html" role="tab" aria-selected="false" id="tabHtmlBtn">
+              <span class="hub-tab-dot dot-html"></span>
+              <span class="hub-tab-title">HTML5 Semantics</span>
+              <span class="hub-tab-badge">Struktur</span>
+            </button>
+            <button class="hub-tab" data-tab="tab-js" role="tab" aria-selected="false" id="tabJsBtn">
+              <span class="hub-tab-dot dot-js"></span>
+              <span class="hub-tab-title">JavaScript Playground</span>
+              <span class="hub-tab-badge">Interaktif</span>
+            </button>
+          </div>
+
+          <!-- TAB 1: C++ RUNNER & CODE VIEWER -->
+          <div class="hub-panel active" id="tab-cpp" role="tabpanel">
+            <div class="cpp-showcase-layout">
+              <!-- Left: Program Selection & Live Runner -->
+              <div class="cpp-runner-box">
+                <div class="box-header">
+                  <div class="box-tag">C++ Program Runner</div>
+                  <label for="cppProgramSelect" class="sr-only">Pilih Program C++</label>
+                  <select id="cppProgramSelect" class="styled-select" aria-label="Pilih program C++">
+                    <option value="oddEven">1. Cek Bilangan Ganjil / Genap</option>
+                    <option value="calc">2. Kalkulator Sederhana (Switch-Case)</option>
+                    <option value="timeConvert">3. Konversi Satuan Waktu (Detik ke Jam/Mnt/Dtk)</option>
+                  </select>
+                </div>
+
+                <!-- Runner Form Areas (Dynamically Switched) -->
+                <div class="runner-inputs" id="runnerInputs">
+                  <!-- Odd/Even Form -->
+                  <div class="input-form-group" id="formOddEven">
+                    <label for="inputOddEven">Masukkan Bilangan Bulat (Integer):</label>
+                    <div class="input-row">
+                      <input type="number" id="inputOddEven" class="styled-input" placeholder="Contoh: 17 atau 42" value="17" />
+                      <button type="button" class="btn btn-primary-cyan btn-sm" id="btnRunOddEven">Jalankan C++</button>
+                    </div>
+                    <span class="input-hint">Formula C++: <code>if (angka % 2 == 0)</code></span>
+                  </div>
+
+                  <!-- Calculator Form -->
+                  <div class="input-form-group hidden" id="formCalc">
+                    <label>Operasi Aritmatika C++:</label>
+                    <div class="calc-input-grid">
+                      <input type="number" id="calcNum1" class="styled-input" placeholder="Angka 1" value="24" />
+                      <select id="calcOperator" class="styled-select" aria-label="Operator Aritmatika">
+                        <option value="+">Tambah (+)</option>
+                        <option value="-">Kurang (-)</option>
+                        <option value="*">Kali (*)</option>
+                        <option value="/">Bagi (/)</option>
+                      </select>
+                      <input type="number" id="calcNum2" class="styled-input" placeholder="Angka 2" value="6" />
+                      <button type="button" class="btn btn-primary-cyan btn-sm" id="btnRunCalc">Hitung</button>
+                    </div>
+                    <span class="input-hint">Logika C++: Menggunakan percabangan <code>switch(op)</code></span>
+                  </div>
+
+                  <!-- Time Conversion Form -->
+                  <div class="input-form-group hidden" id="formTimeConvert">
+                    <label for="inputTimeSeconds">Masukkan Total Detik (Integer):</label>
+                    <div class="input-row">
+                      <input type="number" id="inputTimeSeconds" class="styled-input" placeholder="Contoh: 3665" value="3665" />
+                      <button type="button" class="btn btn-primary-cyan btn-sm" id="btnRunTime">Konversi</button>
+                    </div>
+                    <span class="input-hint">Formula C++: <code>jam = dtk/3600; sisa = dtk%3600; menit = sisa/60; detik = sisa%60;</code></span>
+                  </div>
+                </div>
+
+                <!-- Simulated C++ Output Console -->
+                <div class="cpp-console">
+                  <div class="console-head">
+                    <span class="console-dot red"></span>
+                    <span class="console-dot yellow"></span>
+                    <span class="console-dot green"></span>
+                    <span class="console-title">terminal &mdash; output execution</span>
+                    <button class="console-clear-btn" id="btnClearConsole" type="button">Bersihkan</button>
+                  </div>
+                  <div class="console-body" id="cppConsoleBody">
+                    <div class="console-line text-cyan">$ g++ program.cpp -o program &amp;&amp; ./program</div>
+                    <div class="console-line text-dim">== PROGRAM CEK BILANGAN GANJIL GENAP ==</div>
+                    <div class="console-line">Masukkan bilangan: 17</div>
+                    <div class="console-line text-green">&gt;&gt; [HASIL] Angka 17 adalah BILANGAN GANJIL (17 % 2 = 1)</div>
+                    <div class="console-line text-dim">&gt;&gt; Proses selesai dengan kode keluar 0 (sukses).</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Right: Source Code Viewer with Syntax Highlighting -->
+              <div class="cpp-code-viewer">
+                <div class="viewer-head">
+                  <span class="file-name" id="cppFileName">ganjil_genap.cpp</span>
+                  <button class="btn-copy-code" id="btnCopyCppCode" type="button">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                    <span>Salin Kode C++</span>
+                  </button>
+                </div>
+                <div class="viewer-body">
+                  <pre><code id="cppCodeDisplay" class="cpp-code"></code></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB 2: HTML5 SEMANTIC LAB -->
+          <div class="hub-panel" id="tab-html" role="tabpanel">
+            <div class="html-lab-layout">
+              <div class="html-explanation">
+                <div class="box-tag">Struktur Web Standar W3C</div>
+                <h3>Penerapan HTML5 Semantik yang Baik</h3>
+                <p>
+                  Sebagai Web Developer, Reza selalu memprioritaskan penulisan markup yang ramah mesin pencari (SEO-friendly) dan aksesibel bagi screen reader melalui tag semantik standar HTML5.
+                </p>
+                <div class="semantic-tags-list">
+                  <div class="sem-item">
+                    <code>&lt;header&gt; &amp; &lt;nav&gt;</code>
+                    <span>Menentukan navigasi utama dan identitas brand.</span>
+                  </div>
+                  <div class="sem-item">
+                    <code>&lt;main&gt; &amp; &lt;section&gt;</code>
+                    <span>Membagi konten menjadi bagian-bagian tematik yang logis.</span>
+                  </div>
+                  <div class="sem-item">
+                    <code>&lt;article&gt;</code>
+                    <span>Membungkus kartu proyek atau artikel jurnal mandiri.</span>
+                  </div>
+                  <div class="sem-item">
+                    <code>&lt;aside&gt; &amp; &lt;footer&gt;</code>
+                    <span>Menampilkan pengumuman pendukung dan informasi hak cipta.</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="html-structure-visual">
+                <div class="html-visual-window">
+                  <div class="window-titlebar">
+                    <span>Struktur Dokumen Portofolio Reza (HTML5 Tree)</span>
+                  </div>
+                  <div class="tree-view">
+                    <div class="tree-node">&lt;!DOCTYPE html&gt;</div>
+                    <div class="tree-node indent-1">&lt;html lang="id" data-theme="dark"&gt;</div>
+                    <div class="tree-node indent-2">&lt;head&gt; <span class="tag-comment">&lt;!-- Meta, SEO, Fonts &amp; CSS --&gt;</span> &lt;/head&gt;</div>
+                    <div class="tree-node indent-2">&lt;body&gt;</div>
+                    <div class="tree-node indent-3">&lt;header class="navbar"&gt; &lt;nav&gt; ... &lt;/nav&gt; &lt;/header&gt;</div>
+                    <div class="tree-node indent-3">&lt;main&gt;</div>
+                    <div class="tree-node indent-4">&lt;section id="home"&gt; &lt;h1&gt;Hero&lt;/h1&gt; &lt;/section&gt;</div>
+                    <div class="tree-node indent-4">&lt;section id="codehub"&gt; &lt;!-- Lab C++, HTML, JS --&gt; &lt;/section&gt;</div>
+                    <div class="tree-node indent-4">&lt;section id="projects"&gt; &lt;article&gt; ... &lt;/article&gt; &lt;/section&gt;</div>
+                    <div class="tree-node indent-3">&lt;/main&gt;</div>
+                    <div class="tree-node indent-3">&lt;footer&gt; &lt;p&gt;&copy; 2026 Reza Dwi Kurniawan&lt;/p&gt; &lt;/footer&gt;</div>
+                    <div class="tree-node indent-2">&lt;/body&gt;</div>
+                    <div class="tree-node indent-1">&lt;/html&gt;</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB 3: JAVASCRIPT PLAYGROUND -->
+          <div class="hub-panel" id="tab-js" role="tabpanel">
+            <div class="js-playground-layout">
+              <div class="js-intro">
+                <div class="box-tag">JavaScript Modern (ES6+)</div>
+                <h3>Eksperimen Interaktif dengan DOM &amp; State</h3>
+                <p>
+                  Mengendalikan animasi, manipulasi DOM real-time, event listeners, dan transisi tema gelap/terang tanpa memerlukan pustaka berat eksternal (100% Vanilla JS).
+                </p>
+
+                <!-- Interactive JS Mini Playground -->
+                <div class="js-interactive-box">
+                  <div class="interactive-control-group">
+                    <label for="jsTextModifier">Ketik Teks Dinamis:</label>
+                    <input type="text" id="jsTextModifier" class="styled-input" value="Halo dari Reza Dwi Kurniawan!" />
+                  </div>
+
+                  <div class="interactive-color-picks">
+                    <span>Ubah Warna Aksentuasi:</span>
+                    <div class="color-bubbles">
+                      <button type="button" class="bubble-btn bubble-cyan active" data-color="#00f5d4" title="Cyan Accent" aria-label="Cyan Accent"></button>
+                      <button type="button" class="bubble-btn bubble-purple" data-color="#a855f7" title="Purple Accent" aria-label="Purple Accent"></button>
+                      <button type="button" class="bubble-btn bubble-blue" data-color="#38bdf8" title="Blue Accent" aria-label="Blue Accent"></button>
+                      <button type="button" class="bubble-btn bubble-emerald" data-color="#10b981" title="Emerald Accent" aria-label="Emerald Accent"></button>
+                    </div>
+                  </div>
+
+                  <!-- Live Preview Output -->
+                  <div class="js-live-preview" id="jsLivePreview">
+                    <div class="preview-badge">Live DOM Output</div>
+                    <h4 id="previewHeading" class="preview-heading">Halo dari Reza Dwi Kurniawan!</h4>
+                    <p class="preview-sub">Diperbarui secara instan lewat Vanilla JavaScript <code>input</code> &amp; <code>style</code> listeners.</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- JS Code snippet viewer -->
+              <div class="js-code-box">
+                <div class="viewer-head">
+                  <span class="file-name">theme_&amp;_dom_controller.js</span>
+                  <button class="btn-copy-code" id="btnCopyJsCode" type="button">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                    <span>Salin Script</span>
+                  </button>
+                </div>
+                <div class="viewer-body">
+                  <pre><code id="jsCodeSnippet"><span class="syn-comment">// Switch Tema Gelap / Terang dengan LocalStorage</span>
+<span class="syn-keyword">const</span> <span class="syn-var">themeToggle</span> = <span class="syn-var">document</span>.<span class="syn-func">getElementById</span>(<span class="syn-string">'themeToggle'</span>);
+<span class="syn-keyword">const</span> <span class="syn-var">savedTheme</span> = <span class="syn-var">localStorage</span>.<span class="syn-func">getItem</span>(<span class="syn-string">'user-theme'</span>) || <span class="syn-string">'dark'</span>;
+
+<span class="syn-var">document</span>.<span class="syn-var">documentElement</span>.<span class="syn-func">setAttribute</span>(<span class="syn-string">'data-theme'</span>, <span class="syn-var">savedTheme</span>);
+
+<span class="syn-var">themeToggle</span>.<span class="syn-func">addEventListener</span>(<span class="syn-string">'click'</span>, () =&gt; {
+  <span class="syn-keyword">const</span> <span class="syn-var">current</span> = <span class="syn-var">document</span>.<span class="syn-var">documentElement</span>.<span class="syn-func">getAttribute</span>(<span class="syn-string">'data-theme'</span>);
+  <span class="syn-keyword">const</span> <span class="syn-var">nextTheme</span> = <span class="syn-var">current</span> === <span class="syn-string">'dark'</span> ? <span class="syn-string">'light'</span> : <span class="syn-string">'dark'</span>;
+  
+  <span class="syn-var">document</span>.<span class="syn-var">documentElement</span>.<span class="syn-func">setAttribute</span>(<span class="syn-string">'data-theme'</span>, <span class="syn-var">nextTheme</span>);
+  <span class="syn-var">localStorage</span>.<span class="syn-func">setItem</span>(<span class="syn-string">'user-theme'</span>, <span class="syn-var">nextTheme</span>);
+  <span class="syn-func">showToast</span>(<span class="syn-string">`Beralih ke mode ${nextTheme} ✨`</span>);
+});</code></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS SECTION -->
+    <section class="section skills-section" id="skills">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-subtitle">KEAHLIAN &amp; KOMPETENSI</span>
+          <h2 class="section-title">Teknologi yang Saya Kuasai &amp; Dalami</h2>
+          <p class="section-desc">
+            Kombinasi antara bahasa pemrograman struktural, arsitektur front-end, dan perkakas rekayasa web modern.
+          </p>
+        </div>
+
+        <!-- Filter Buttons -->
+        <div class="skills-filter reveal">
+          <button class="filter-chip active" data-filter="all">Semua Teknologi</button>
+          <button class="filter-chip" data-filter="web">Web &amp; Frontend</button>
+          <button class="filter-chip" data-filter="system">Logika &amp; C++</button>
+          <button class="filter-chip" data-filter="tools">Tools &amp; Git</button>
+        </div>
+
+        <!-- Skills Cards Grid -->
+        <div class="skills-grid">
+          <!-- Skill: C++ -->
+          <article class="skill-card tilt-card reveal" data-category="system">
+            <div class="skill-top">
+              <div class="skill-icon-badge cpp-badge">C++</div>
+              <span class="skill-level-pill">85%</span>
+            </div>
+            <h3 class="skill-name">C++ Programming</h3>
+            <p class="skill-desc">
+              Memahami tipe data, percabangan (if/switch), perulangan (loops), fungsi modular, struktur data dasar, dan pemecahan masalah algoritma.
+            </p>
+            <div class="skill-progress-bar">
+              <div class="skill-progress-fill" style="--percent: 85%;"></div>
+            </div>
+            <div class="skill-tags">
+              <span>Algoritma</span>
+              <span>Modulus &amp; Math</span>
+              <span>Procedural</span>
+            </div>
+          </article>
+
+          <!-- Skill: HTML5 -->
+          <article class="skill-card tilt-card reveal" data-category="web">
+            <div class="skill-top">
+              <div class="skill-icon-badge html-badge">&lt;/&gt;</div>
+              <span class="skill-level-pill">90%</span>
+            </div>
+            <h3 class="skill-name">HTML5 Semantics</h3>
+            <p class="skill-desc">
+              Penyusunan kerangka web semantik yang terstandar, struktur dokumen W3C, aksesibilitas (ARIA), dan pengoptimalan SEO teknis pada setiap halaman.
+            </p>
+            <div class="skill-progress-bar">
+              <div class="skill-progress-fill" style="--percent: 90%;"></div>
+            </div>
+            <div class="skill-tags">
+              <span>Semantic Elements</span>
+              <span>SEO</span>
+              <span>ARIA Accessibility</span>
+            </div>
+          </article>
+
+          <!-- Skill: JavaScript -->
+          <article class="skill-card tilt-card reveal" data-category="web">
+            <div class="skill-top">
+              <div class="skill-icon-badge js-badge">JS</div>
+              <span class="skill-level-pill">80%</span>
+            </div>
+            <h3 class="skill-name">JavaScript (ES6+)</h3>
+            <p class="skill-desc">
+              Manipulasi Document Object Model (DOM), penanganan event asinkron, web storage API, animasi interaktif canvas, dan arsitektur logika antarmuka.
+            </p>
+            <div class="skill-progress-bar">
+              <div class="skill-progress-fill" style="--percent: 80%;"></div>
+            </div>
+            <div class="skill-tags">
+              <span>DOM Events</span>
+              <span>ES6+</span>
+              <span>Interactive UI</span>
+            </div>
+          </article>
+
+          <!-- Skill: CSS3 -->
+          <article class="skill-card tilt-card reveal" data-category="web">
+            <div class="skill-top">
+              <div class="skill-icon-badge css-badge">CSS</div>
+              <span class="skill-level-pill">88%</span>
+            </div>
+            <h3 class="skill-name">CSS3 &amp; Modern Styling</h3>
+            <p class="skill-desc">
+              Desain tata letak Flexbox &amp; Grid responsif, CSS Custom Properties (Variables), glassmorphism, keyframe animations, dan implementasi tema ganda.
+            </p>
+            <div class="skill-progress-bar">
+              <div class="skill-progress-fill" style="--percent: 88%;"></div>
+            </div>
+            <div class="skill-tags">
+              <span>Dual Themes</span>
+              <span>Glassmorphism</span>
+              <span>Responsive Grid</span>
+            </div>
+          </article>
+
+          <!-- Skill: Git & GitHub -->
+          <article class="skill-card tilt-card reveal" data-category="tools">
+            <div class="skill-top">
+              <div class="skill-icon-badge git-badge">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M2.6 10.59L8.38 4.8a1.69 1.69 0 0 1 2.4 0l1.2 1.2-2.73 2.73a2.38 2.38 0 0 0-1.24 2.08 2.39 2.39 0 0 0 1.64 2.27v4.36a2.4 2.4 0 0 0 1.64 2.28 2.39 2.39 0 0 0 2.28-1.64 2.4 2.4 0 0 0-.64-2.72v-3.23a2.39 2.39 0 0 0 1-1.95 2.37 2.37 0 0 0-.7-1.69l2.74-2.74 4.67 4.67a1.7 1.7 0 0 1 0 2.4l-5.78 5.79a1.7 1.7 0 0 1-2.4 0L2.6 13a1.7 1.7 0 0 1 0-2.41z"/></svg>
+              </div>
+              <span class="skill-level-pill">78%</span>
+            </div>
+            <h3 class="skill-name">Git &amp; GitHub</h3>
+            <p class="skill-desc">
+              Version control system, commit manajemen, percabangan repositori, dan hosting proyek berbasis open-source untuk kolaborasi tim.
+            </p>
+            <div class="skill-progress-bar">
+              <div class="skill-progress-fill" style="--percent: 78%;"></div>
+            </div>
+            <div class="skill-tags">
+              <span>Version Control</span>
+              <span>Repository</span>
+              <span>Collaboration</span>
+            </div>
+          </article>
+
+          <!-- Skill: Problem Solving -->
+          <article class="skill-card tilt-card reveal" data-category="system">
+            <div class="skill-top">
+              <div class="skill-icon-badge logic-badge">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+              </div>
+              <span class="skill-level-pill">85%</span>
+            </div>
+            <h3 class="skill-name">Problem Solving &amp; Logika</h3>
+            <p class="skill-desc">
+              Kemampuan analisis persoalan komputasional, perancangan diagram alir logika (flowchart), dan penerjemahan ke dalam baris kode nyata.
+            </p>
+            <div class="skill-progress-bar">
+              <div class="skill-progress-fill" style="--percent: 85%;"></div>
+            </div>
+            <div class="skill-tags">
+              <span>Analisis Masalah</span>
+              <span>Flowchart</span>
+              <span>Computational</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS SHOWCASE SECTION -->
+    <section class="section projects-section" id="projects">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-subtitle">PORTOFOLIO KARYA</span>
+          <h2 class="section-title">Proyek Unggulan yang Telah Saya Buat</h2>
+          <p class="section-desc">
+            Setiap proyek berikut merupakan hasil pembelajaran nyata dan implementasi praktis konsep logika pemrograman serta teknologi web.
+          </p>
+        </div>
+
+        <div class="projects-grid">
+          <!-- Project 1: Bilangan Ganjil Genap -->
+          <article class="project-card tilt-card reveal">
+            <div class="project-thumb-wrap">
+              <img src="images/bilangan-ganjil-genap.png" alt="Screenshot Program Bilangan Ganjil Genap C++" class="project-img" loading="lazy" />
+              <div class="project-overlay">
+                <button class="project-preview-btn" data-img="images/bilangan-ganjil-genap.png" data-title="Cek Bilangan Ganjil &amp; Genap (C++)" data-desc="Program C++ yang menggunakan operasi aritmatika Modulo (%) untuk menentukan sifat bilangan ganjil atau genap secara akurat dengan input fleksibel dari pengguna.">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                  <span>Pratinjau Layar Penuh</span>
+                </button>
+              </div>
+              <span class="project-badge-num">01</span>
+            </div>
+
+            <div class="project-body">
+              <div class="project-tags">
+                <span class="tag-tech cpp">C++</span>
+                <span class="tag-tech">Modulo Logic</span>
+                <span class="tag-tech">Algorithm</span>
+              </div>
+              <h3 class="project-heading">Cek Bilangan Ganjil &amp; Genap</h3>
+              <p class="project-summary">
+                Aplikasi console C++ yang menganalisis input angka integer dari pengguna, menerapkan evaluasi modulus <code>n % 2 == 0</code>, dan menampilkan hasil klasifikasi secara real-time.
+              </p>
+              <div class="project-foot">
+                <button class="btn btn-sm btn-outline-cyan open-modal-btn" data-img="images/bilangan-ganjil-genap.png" data-title="Cek Bilangan Ganjil &amp; Genap (C++)" data-desc="Program C++ yang menggunakan operasi modulus untuk mendeteksi apakah suatu bilangan habis dibagi dua. Dilengkapi penanganan input integer dan pesan terminal terformat rapi.">
+                  Lihat Detail &amp; Screenshot &rarr;
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 2: Kalkulator Sederhana -->
+          <article class="project-card tilt-card reveal">
+            <div class="project-thumb-wrap">
+              <img src="images/kalkulator-sederhana.png" alt="Screenshot Program Kalkulator Sederhana C++" class="project-img" loading="lazy" />
+              <div class="project-overlay">
+                <button class="project-preview-btn" data-img="images/kalkulator-sederhana.png" data-title="Kalkulator Aritmatika Sederhana (C++)" data-desc="Program kalkulator C++ dengan struktur kontrol switch-case yang mendukung 4 operasi dasar: penjumlahan, pengurangan, perkalian, dan pembagian disertai validasi pembagian dengan nol.">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                  <span>Pratinjau Layar Penuh</span>
+                </button>
+              </div>
+              <span class="project-badge-num">02</span>
+            </div>
+
+            <div class="project-body">
+              <div class="project-tags">
+                <span class="tag-tech cpp">C++</span>
+                <span class="tag-tech">Switch-Case</span>
+                <span class="tag-tech">Math Logic</span>
+              </div>
+              <h3 class="project-heading">Kalkulator Aritmatika Dasar</h3>
+              <p class="project-summary">
+                Menerapkan konsep percabangan ganda C++ untuk memproses dua bilangan dengan operator matematika (+, -, *, /) serta proteksi <em>division-by-zero</em>.
+              </p>
+              <div class="project-foot">
+                <button class="btn btn-sm btn-outline-cyan open-modal-btn" data-img="images/kalkulator-sederhana.png" data-title="Kalkulator Aritmatika Dasar (C++)" data-desc="Program kalkulator console interaktif berbasis C++ dengan menu pemilihan operator dan tampilan hasil kalkulasi yang rapi di console.">
+                  Lihat Detail &amp; Screenshot &rarr;
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 3: Konversi Satuan Waktu -->
+          <article class="project-card tilt-card reveal">
+            <div class="project-thumb-wrap">
+              <img src="images/konversi-waktu.png" alt="Screenshot Program Konversi Satuan Waktu C++" class="project-img" loading="lazy" />
+              <div class="project-overlay">
+                <button class="project-preview-btn" data-img="images/konversi-waktu.png" data-title="Konversi Satuan Waktu (C++)" data-desc="Program C++ untuk mengonversi akumulasi detik menjadi format terstruktur: Jam, Menit, dan Detik dengan memanfaatkan pembagian integer dan sisa bagi (modulus).">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                  <span>Pratinjau Layar Penuh</span>
+                </button>
+              </div>
+              <span class="project-badge-num">03</span>
+            </div>
+
+            <div class="project-body">
+              <div class="project-tags">
+                <span class="tag-tech cpp">C++</span>
+                <span class="tag-tech">Time Math</span>
+                <span class="tag-tech">Arithmetic</span>
+              </div>
+              <h3 class="project-heading">Konversi Satuan Waktu</h3>
+              <p class="project-summary">
+                Transformasi nilai detik absolut menjadi representasi waktu standar (Jam : Menit : Detik) menggunakan algoritma dekomposisi matematika integer secara presisi.
+              </p>
+              <div class="project-foot">
+                <button class="btn btn-sm btn-outline-cyan open-modal-btn" data-img="images/konversi-waktu.png" data-title="Konversi Satuan Waktu (C++)" data-desc="Program console C++ yang menguraikan total detik ke dalam komponen jam, menit, dan detik dengan penghitungan modulus bertingkat.">
+                  Lihat Detail &amp; Screenshot &rarr;
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 4: Web Portfolio RezaDev -->
+          <article class="project-card tilt-card reveal">
+            <div class="project-thumb-wrap web-thumb">
+              <div class="web-preview-mockup">
+                <div class="mockup-bar">
+                  <span></span><span></span><span></span>
+                  <div class="mockup-address">https://rezadev-portfolio.local</div>
+                </div>
+                <div class="mockup-content">
+                  <div class="mockup-hero-mini">
+                    <span class="mock-tag">&lt;RezaDev./&gt;</span>
+                    <h4>Dual-Theme Modern Portfolio</h4>
+                    <p>Dark &amp; Light Mode • C++, HTML5, Vanilla JS</p>
+                  </div>
+                </div>
+              </div>
+              <span class="project-badge-num">04</span>
+            </div>
+
+            <div class="project-body">
+              <div class="project-tags">
+                <span class="tag-tech html">HTML5</span>
+                <span class="tag-tech js">JavaScript</span>
+                <span class="tag-tech css">CSS3</span>
+                <span class="tag-tech">Dual Theme</span>
+              </div>
+              <h3 class="project-heading">RezaDev Modern Web Portfolio</h3>
+              <p class="project-summary">
+                Website portofolio yang sedang Anda jelajahi saat ini! Dirancang khusus dengan tema modern gelap dan terang, animasi interaktif 3D tilt, simulator C++, dan performa ultra cepat.
+              </p>
+              <div class="project-foot">
+                <a href="#codehub" class="btn btn-sm btn-outline-cyan">
+                  Eksplorasi Fitur Web &rarr;
+                </a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- LEARNING JOURNAL & TIMELINE SECTION -->
+    <section class="section journal-section" id="journal">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-subtitle">PERJALANAN BELAJAR</span>
+          <h2 class="section-title">Milestone &amp; Catatan Proses Menuju Web Developer</h2>
+          <p class="section-desc">
+            Setiap pencapaian besar selalu dimulai dari langkah-langkah konsisten dalam memecahkan baris kode setiap hari.
+          </p>
+        </div>
+
+        <div class="journal-timeline">
+          <!-- Timeline Item 1 -->
+          <div class="timeline-step reveal">
+            <div class="step-marker">
+              <div class="marker-dot"></div>
+              <div class="marker-line"></div>
+            </div>
+            <div class="step-card tilt-card">
+              <div class="step-head">
+                <span class="step-category cpp">Fondasi Pemrograman C++</span>
+                <span class="step-year">Fase 1</span>
+              </div>
+              <h3 class="step-title">Memahami Logika Dasar, Percabangan &amp; Perulangan</h3>
+              <p class="step-desc">
+                Memulai langkah pertama di Teknik Informatika UNESA dengan mempelajari C++. Menyelesaikan proyek latihan bilangan ganjil/genap, kalkulator aritmatika dengan switch-case, serta konversi waktu.
+              </p>
+              <div class="step-tags">
+                <span>C++</span>
+                <span>Algoritma</span>
+                <span>Console Application</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Timeline Item 2 -->
+          <div class="timeline-step reveal">
+            <div class="step-marker">
+              <div class="marker-dot"></div>
+              <div class="marker-line"></div>
+            </div>
+            <div class="step-card tilt-card">
+              <div class="step-head">
+                <span class="step-category html">Struktur &amp; Desain Web</span>
+                <span class="step-year">Fase 2</span>
+              </div>
+              <h3 class="step-title">Mendalami HTML5 Semantik &amp; CSS3 Modern</h3>
+              <p class="step-desc">
+                Mengeksplorasi bagaimana halaman web dibentuk. Memahami hierarki tag semantik, layout responsif dengan CSS Flexbox dan Grid, tipografi web, dan sistem variabel CSS (Custom Properties).
+              </p>
+              <div class="step-tags">
+                <span>HTML5</span>
+                <span>CSS Grid/Flexbox</span>
+                <span>Responsive Design</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Timeline Item 3 -->
+          <div class="timeline-step reveal">
+            <div class="step-marker">
+              <div class="marker-dot"></div>
+              <div class="marker-line"></div>
+            </div>
+            <div class="step-card tilt-card">
+              <div class="step-head">
+                <span class="step-category js">Interaktivitas Frontend</span>
+                <span class="step-year">Fase 3</span>
+              </div>
+              <h3 class="step-title">Menghidupkan Website dengan JavaScript Vanilla</h3>
+              <p class="step-desc">
+                Mengintegrasikan JavaScript modern (ES6+) untuk manipulasi DOM dinamis, animasi scroll reveal (IntersectionObserver), efek partikel canvas, serta sistem toggle tema ganda (Gelap &amp; Terang) yang tersimpan di localStorage.
+              </p>
+              <div class="step-tags">
+                <span>JavaScript ES6+</span>
+                <span>DOM Manipulation</span>
+                <span>State &amp; LocalStorage</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Timeline Item 4 -->
+          <div class="timeline-step reveal">
+            <div class="step-marker">
+              <div class="marker-dot"></div>
+            </div>
+            <div class="step-card tilt-card">
+              <div class="step-head">
+                <span class="step-category future">Langkah Berikutnya</span>
+                <span class="step-year">Masa Depan</span>
+              </div>
+              <h3 class="step-title">Eksplorasi Full-Stack &amp; Framework Web</h3>
+              <p class="step-desc">
+                Terus memperluas wawasan ke arah arsitektur web modern, integrasi API, pengolahan database, serta framework JavaScript seperti React atau Next.js untuk membangun aplikasi skala penuh.
+              </p>
+              <div class="step-tags">
+                <span>Full-Stack Development</span>
+                <span>Web Architecture</span>
+                <span>Continuous Learning</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section class="section contact-section" id="contact">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-subtitle">TERHUBUNG DENGAN SAYA</span>
+          <h2 class="section-title">Mari Berdiskusi &amp; Berkolaborasi</h2>
+          <p class="section-desc">
+            Saya selalu terbuka untuk berdiskusi seputar pemrograman, proyek web, peluang magang, maupun berbagi pengalaman di bidang teknologi.
+          </p>
+        </div>
+
+        <div class="contact-grid">
+          <!-- Left: Contact Details Cards -->
+          <div class="contact-info-col reveal">
+            <div class="contact-card-list">
+              <!-- Email Card with Copy Button -->
+              <div class="contact-item-card">
+                <div class="item-icon-box">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                </div>
+                <div class="item-details">
+                  <span class="item-label">Email Resmi</span>
+                  <a href="mailto:rdwik1190@gmail.com" class="item-value">rdwik1190@gmail.com</a>
+                </div>
+                <button type="button" class="btn-copy-instant copy-email-btn" data-email="rdwik1190@gmail.com" title="Salin Email">
+                  Salin
+                </button>
+              </div>
+
+              <!-- GitHub Card -->
+              <a href="https://github.com/rdwik1190-web" target="_blank" rel="noopener noreferrer" class="contact-item-card">
+                <div class="item-icon-box">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                </div>
+                <div class="item-details">
+                  <span class="item-label">Profil GitHub</span>
+                  <span class="item-value">github.com/rdwik1190-web</span>
+                </div>
+                <span class="item-arrow">&nearr;</span>
+              </a>
+
+              <!-- LinkedIn Card -->
+              <a href="https://www.linkedin.com/in/reza-dwi-k-742284441" target="_blank" rel="noopener noreferrer" class="contact-item-card">
+                <div class="item-icon-box">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                </div>
+                <div class="item-details">
+                  <span class="item-label">Profil LinkedIn</span>
+                  <span class="item-value">Reza Dwi K</span>
+                </div>
+                <span class="item-arrow">&nearr;</span>
+              </a>
+
+              <!-- Instagram Card -->
+              <a href="https://www.instagram.com/kreza8026" target="_blank" rel="noopener noreferrer" class="contact-item-card">
+                <div class="item-icon-box">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                </div>
+                <div class="item-details">
+                  <span class="item-label">Instagram Pribadi</span>
+                  <span class="item-value">@kreza8026</span>
+                </div>
+                <span class="item-arrow">&nearr;</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Right: Interactive Direct Message Form -->
+          <div class="contact-form-col reveal">
+            <form class="contact-box-form" id="contactForm" novalidate>
+              <h3 class="form-heading">Kirimkan Pesan Langsung</h3>
+              <p class="form-desc">Isi formulir di bawah ini untuk mengirimkan pesan, pertanyaan, atau tawaran kolaborasi.</p>
+
+              <div class="form-group">
+                <label for="senderName">Nama Lengkap Anda *</label>
+                <input type="text" id="senderName" class="form-input" placeholder="Contoh: Budi Santoso" required />
+                <span class="form-error" id="nameError"></span>
+              </div>
+
+              <div class="form-group">
+                <label for="senderEmail">Alamat Email Anda *</label>
+                <input type="email" id="senderEmail" class="form-input" placeholder="contoh@domain.com" required />
+                <span class="form-error" id="emailError"></span>
+              </div>
+
+              <div class="form-group">
+                <label for="senderSubject">Subjek / Topik</label>
+                <input type="text" id="senderSubject" class="form-input" placeholder="Contoh: Kolaborasi Proyek Web" />
+              </div>
+
+              <div class="form-group">
+                <label for="senderMessage">Isi Pesan *</label>
+                <textarea id="senderMessage" class="form-input form-textarea" rows="4" placeholder="Tuliskan pesan Anda di sini..." required></textarea>
+                <span class="form-error" id="messageError"></span>
+              </div>
+
+              <button type="submit" class="btn btn-primary-cyan btn-block" id="btnSubmitMessage">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                <span>Kirim Pesan Sekarang</span>
+              </button>
+
+              <div class="form-success-banner hidden" id="formSuccessBanner">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                <span>Terima kasih! Pesan Anda telah disimulasikan terkirim ke Reza.</span>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container footer-wrap">
+      <div class="footer-left">
+        <a href="#home" class="brand footer-brand">
+          <span class="brand-bracket">&lt;</span>
+          <span class="brand-text">RezaDev</span>
+          <span class="brand-dot">.</span>
+          <span class="brand-bracket">/&gt;</span>
+        </a>
+        <p class="footer-copy">
+          &copy; <span id="currentYear">2026</span> <strong>Reza Dwi Kurniawan</strong> &bull; Mahasiswa Teknik Informatika UNESA
+        </p>
+      </div>
+
+      <div class="footer-right">
+        <button class="footer-theme-btn" id="footerThemeBtn" type="button">
+          <span>Ganti Mode Gelap / Terang</span>
+        </button>
+        <a href="#home" class="back-to-top-btn" aria-label="Kembali ke atas halaman">
+          <span>Ke Atas</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- FULLSCREEN IMAGE & PROJECT PREVIEW MODAL -->
+  <div class="modal-overlay" id="projectModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-backdrop" id="modalBackdrop"></div>
+    <div class="modal-container">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <span class="modal-pill">TAMPILAN SCREENSHOT</span>
+          <h3 class="modal-title" id="modalTitle">Pratinjau Proyek</h3>
+        </div>
+        <button class="modal-close-btn" id="modalCloseBtn" aria-label="Tutup pratinjau">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="modal-image-box">
+          <img src="" alt="Pratinjau Proyek" id="modalImage" />
+        </div>
+        <p class="modal-desc" id="modalDesc"></p>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-glass modal-close-secondary" id="modalCloseSecondary" type="button">Tutup Jendela</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FLOATING TOAST NOTIFICATION CONTAINER -->
+  <div class="toast-hub" id="toastHub" aria-live="polite"></div>
+
+  <!-- SCRIPT -->
+  <script src="script.js"></script>
+</body>
+</html>
